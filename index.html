@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bookshelf App</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="index.css">
+</head>
+<body>
+  <header>
+    <div class="blur"></div>
+    <img class="bookshelf-bg" src="img/bookshelf-bg.jpg" alt="bookshelf-background">
+    <div class="text-overlay">
+      <h1>Bookshelf App</h1>
+      <form id="filter">
+        <input type="text" id="search-book" placeholder="Filter books by typing book's title">
+        <button type="submit" id="show-button">Show</button>
+      </form>
+    </div>
+  </header>
+  <main>
+    <section class="input-book-container">
+      <form id="form-book-submit">
+        <div class="flex-col">
+          <label for="title">Title</label>
+          <input type="text" name="title" id="title" placeholder="Input book's title" required>
+        </div>
+
+        <div class="flex-col">
+          <label for="author">Author</label>
+          <input type="text" name="author" id="author" placeholder="Input book's author" required>
+        </div>
+        <div class="flex-col">
+          <label for="year">Year</label>
+          <input type="number" name="year" id="year" placeholder="Input year of book" required>
+        </div>
+
+        <div class="flex-row">
+          <input type="checkbox" name="finish" id="finish">
+          <label for="finish">Mark as finished reading</label>
+        </div>
+
+        <button type="submit" id="add-book-btn">Add to bookshelf</button>
+      </form>
+    </section>
+
+    <section class="unfinished-read">
+      <h2>List of unfinished read books</h2>
+    
+    <!--
+      <div class="book-info-container">
+        <p class="book-title">Book Title</p>
+        <p>Author: John Doe</p>
+        <p>Year: 2024</p>
+
+        <div class="action">
+          <button id="finish-btn">finish read</button>
+          <button id="delete-btn">Delete</button>
+        </div>
+      </div>
+    -->
+      
+    </section>
+
+    <section class="finish-read">
+      <h2>List of finished read books</h2>
+    </section>
+    
+  </main>
+</body>
+<script src="index.js"></script>
+</html>
