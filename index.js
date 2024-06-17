@@ -6,6 +6,10 @@ document.addEventListener('DOMContentLoaded', function(){
     e.preventDefault()
     addBook()
   })
+
+  if(isStorageExist()){
+    loadDataFromStorage()
+  }
 })
 
 function addBook(){
@@ -24,6 +28,8 @@ function addBook(){
   books.push(object)
 
   document.dispatchEvent(new Event(RENDER_EVENT))
+
+  saveData()
 }
 
 function generateId(){
@@ -79,6 +85,13 @@ function makeBook(book){
     deleteBook(book.id)
   })
 
+  const edit_button = document.createElement('button')
+  edit_button.setAttribute('id', 'edit-btn')
+  edit_button.innerText = 'Edit Book'
+  edit_button.addEventListener('click', function(){
+    editBook(book.id)
+  })
+
 
   if(!book.isComplete){
     const finish_button = document.createElement('button')
@@ -111,6 +124,13 @@ function deleteBook(bookID){
   if(target === -1)return
   books.splice(target, 1)
   document.dispatchEvent(new Event(RENDER_EVENT))
+
+  saveData()
+}
+
+function editBook(bookID){
+  const target = findBookIndex
+  
 }
 
 function findBookIndex(bookID){
@@ -127,6 +147,8 @@ function moveBookToFinishread(bookID){
   if(target === null)return
   target.isComplete = true
   document.dispatchEvent(new Event(RENDER_EVENT))
+
+  saveData()
 }
 
 function moveBookToUnfinishread(bookID){
@@ -134,6 +156,8 @@ function moveBookToUnfinishread(bookID){
   if(target === null)return
   target.isComplete = false
   document.dispatchEvent(new Event(RENDER_EVENT))
+
+  saveData()
 }
 
 function findBook(bookID){
@@ -144,3 +168,49 @@ function findBook(bookID){
   }
   return null
 }
+
+
+const STORAGE_KEY = 'Bookshelf-App'
+const SAVED_EVENT = 'saved-book'
+
+function saveData(){
+  if(isStorageExist()){
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(books))
+    document.dispatchEvent(new Event(SAVED_EVENT))
+  }
+}
+
+document.addEventListener(SAVED_EVENT, function(){
+  console.log(localStorage.getItem(STORAGE_KEY))
+})
+
+function isStorageExist(){
+  if(typeof(Storage) !== undefined){
+    return true;
+  }
+  else{
+    alert("Your browser doesn't support web storage")
+    return false
+  }
+}
+
+function loadDataFromStorage(){
+  const getData = localStorage.getItem(STORAGE_KEY)
+
+  let data = JSON.parse(getData)
+  
+  if(data != null){
+    for(const bookInfo of data){
+      books.push(bookInfo)
+    }
+  }
+
+  document.dispatchEvent(new Event(RENDER_EVENT))
+}
+
+//filter feature
+document.getElementById('filter').addEventListener('submit', function(){
+  let filter = document.getElementById('search-book').value
+  
+
+})
