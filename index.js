@@ -1,5 +1,6 @@
 const books = []
 const RENDER_EVENT = 'render-books'
+let query = ''
 
 document.addEventListener('DOMContentLoaded', function(){
   document.getElementById('form-book-submit').addEventListener('submit', function(e){
@@ -10,6 +11,12 @@ document.addEventListener('DOMContentLoaded', function(){
   if(isStorageExist()){
     loadDataFromStorage()
   }
+
+  document.getElementById('filter').addEventListener('submit', function(e){
+    e.preventDefault()
+    query = document.getElementById('search-book').value.toLowerCase()
+    document.dispatchEvent(new Event(RENDER_EVENT))
+  })
 })
 
 function addBook(){
@@ -17,13 +24,9 @@ function addBook(){
   const author = document.getElementById('author').value
   const year = document.getElementById('year').value
   const isComplete = document.getElementById('finish').checked
-  console.log(isComplete)
   const id = generateId()
 
-
   const object = generateObject(id, title, author, year, isComplete)
-
-  console.log(object)
 
   books.push(object)
 
@@ -40,6 +43,7 @@ function generateObject(id, title, author, year, isComplete){
   return {id, title, author, year, isComplete}
 }
 
+
 document.addEventListener(RENDER_EVENT, function(){
   const unfinishedRead = document.querySelector('.unfinished-read')
   unfinishedRead.innerHTML = ''
@@ -48,7 +52,9 @@ document.addEventListener(RENDER_EVENT, function(){
   finishRead.innerHTML = ''
   finishRead.innerHTML = ' <h2>List of finished read books</h2>'
 
-  for(const book of books){
+  const filteredBooks = books.filter(book=>book.title.toLowerCase().includes(query))
+
+  for(const book of filteredBooks){
     const element = makeBook(book)
     if(!book.isComplete){
       unfinishedRead.append(element)
@@ -120,12 +126,15 @@ function makeBook(book){
 }
 
 function deleteBook(bookID){
-  const target = findBookIndex(bookID)
-  if(target === -1)return
-  books.splice(target, 1)
-  document.dispatchEvent(new Event(RENDER_EVENT))
-
-  saveData()
+  const confirmation = confirm("Are you sure want to delete this book?")
+  if(confirmation){
+    const target = findBookIndex(bookID)
+    if(target === -1)return
+    books.splice(target, 1)
+    document.dispatchEvent(new Event(RENDER_EVENT))
+  
+    saveData()
+  }
 }
 
 function editBook(bookID){
@@ -207,10 +216,3 @@ function loadDataFromStorage(){
 
   document.dispatchEvent(new Event(RENDER_EVENT))
 }
-
-//filter feature
-document.getElementById('filter').addEventListener('submit', function(){
-  let filter = document.getElementById('search-book').value
-  
-
-})
