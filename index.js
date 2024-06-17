@@ -108,7 +108,7 @@ function makeBook(book){
       moveBookToFinishread(book.id)
     })
 
-    button_container.append(finish_button, delete_button)
+    button_container.append(edit_button, finish_button, delete_button)
   }
   else{
     const notFinish_button = document.createElement('button')
@@ -119,26 +119,68 @@ function makeBook(book){
       moveBookToUnfinishread(book.id)
     })
     
-    button_container.append(notFinish_button, delete_button)
+    button_container.append(edit_button, notFinish_button, delete_button)
   }
 
   return bookInfoContainer
 }
 
 function deleteBook(bookID){
-  const confirmation = confirm("Are you sure want to delete this book?")
-  if(confirmation){
+  const overlay = document.querySelector(".confirmation-popup")
+  overlay.classList.toggle('confirm-hidden')
+
+  const confirm_delete= document.getElementById('confirm-delete')
+  const cancel_delete =document.getElementById('cancel-delete')
+
+  confirm_delete.onclick = function(){
     const target = findBookIndex(bookID)
     if(target === -1)return
     books.splice(target, 1)
     document.dispatchEvent(new Event(RENDER_EVENT))
   
     saveData()
+
+    overlay.classList.toggle('confirm-hidden')
+  }
+  
+
+  cancel_delete.onclick = function(){
+    overlay.classList.toggle('confirm-hidden')
   }
 }
 
 function editBook(bookID){
-  const target = findBookIndex
+  const overlay = document.querySelector('.edit-popup')
+  overlay.classList.toggle('edit-hidden')
+
+  const update_button = document.getElementById('update-edit')
+  const cancel_button = document.getElementById('cancel-edit')
+
+  update_button.onclick = function(){
+    const target = findBookIndex(bookID)
+
+    if(document.getElementById('title-edit').value !== ''){
+      books[target].title = document.getElementById('title-edit').value
+    }
+
+    if(document.getElementById('author-edit').value !== ''){
+      books[target].author = document.getElementById('author-edit').value
+    }
+
+    if(document.getElementById('year-edit').value !== ''){
+      books[target].year = document.getElementById('year-edit').value
+    }
+
+    document.dispatchEvent(new Event(RENDER_EVENT))
+  
+    saveData()
+
+    overlay.classList.toggle('edit-hidden')
+  }
+
+  cancel_button.onclick = function(){
+    overlay.classList.toggle('edit-hidden')
+  }
   
 }
 

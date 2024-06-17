@@ -103,7 +103,8 @@ main{
 }
 
 #add-book-btn{
-  padding:0.5rem 0;
+  font-weight: bold;
+  padding:0.75rem 0;
   cursor: pointer;
   background-color: 	rgb(187,153,102);
   color:white;
@@ -132,6 +133,7 @@ main{
   background-color: 	white;
   color: black;
   border: 5px;
+  border-radius: 5px;
   padding:0.5rem;
 }
 
@@ -142,6 +144,15 @@ main{
 .action{
   display: flex;
   gap: 0 0.5rem;
+}
+
+#edit-btn{
+  background-color: #FF8F00;
+  color:white;
+  padding:0.5rem 1rem;
+  border: none;
+  border-radius: 5px;
+  cursor:pointer;
 }
 
 #finish-btn,
@@ -164,13 +175,114 @@ main{
 }
 
 
+
+.confirmation-popup,
+.edit-popup{
+  position: fixed;
+  z-index: 999;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.confirm-hidden {
+  display: none;
+}
+
+
+.confirm-container{
+  text-align: center;
+  background-color: white;
+  padding: 3.125rem;
+  border-radius: 10px;
+}
+
+.confirm-container img{
+  width: 12.5rem;
+}
+
+.confirm-container p{
+  margin-bottom: 15px;
+}
+
+.confirm-container button:nth-child(odd){
+  margin-right: 1rem;
+}
+
+#confirm-delete,
+#cancel-delete{
+  padding: 0.5rem 1rem;
+  color:white;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+}
+
+#confirm-delete{
+  background-color: #15907C;
+}
+
+#cancel-delete{
+  background-color: red;
+}
+
+
+
+.edit-hidden{
+  display: none;
+}
+
+.edit-container{
+  background-color: white;
+  padding: 3.125rem;
+}
+
+.edit-container h3{
+  margin-bottom: 1rem;
+}
+
+#form-edit-book{
+  display: flex;
+  flex-direction: column;
+  gap: 1rem 0;
+}
+
+#title-edit,
+#author-edit,
+#year-edit{
+  padding: 0.5rem;
+}
+
+#update-edit,
+#cancel-edit{
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 2px;
+  color:white;
+  cursor: pointer;
+}
+
+#update-edit{
+  background-color: #FF8F00;
+}
+
+#cancel-edit{
+  background-color: red;
+}
+
+
 @media screen and (max-width: 1200px){
   html{
     font-size: 14px;
   }
 
   #search-book{
-    width: 400px;
+    width: 80%;
   }
 
 }
@@ -178,6 +290,10 @@ main{
 @media screen and (max-width: 768px){
   html{
     font-size: 12px;
+  }
+
+  #search-book{
+    width: 60%;
   }
 
   main{
@@ -191,8 +307,13 @@ main{
     font-size: 10px;
   }
 
+  #search-book{
+    width: 80%;
+  }
+
   #filter{
     flex-direction: column;
+    gap: 1rem 0;
     justify-content: center;
   }
 

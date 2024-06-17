@@ -52,8 +52,7 @@
     <section class="unfinished-read">
       <h2>List of unfinished read books</h2>
     
-    
-      <div class="book-info-container">
+      <!-- <div class="book-info-container">
         <p class="book-title">Book Title</p>
         <p>Author: John Doe</p>
         <p>Year: 2024</p>
@@ -63,9 +62,8 @@
           <button id="finish-btn">finish read</button>
           <button id="delete-btn">Delete</button>
         </div>
-      </div>
+      </div> -->
    
-      
     </section>
 
     <section class="finish-read">
@@ -73,6 +71,43 @@
     </section>
     
   </main>
+
+  <div class="confirmation-popup confirm-hidden">
+    <div class="confirm-container">
+      <img src="img/warning.png" alt="warning" >
+      <p>Are you sure want to delete this book?</p>
+      <button id="confirm-delete">Delete</button>
+      <button id="cancel-delete">Cancel</button>
+    </div>
+  </div>
+
+  <div class="edit-popup edit-hidden">
+    <div class="edit-container">
+      <h3>Edit Book Information</h3>
+      <form id="form-edit-book">
+        <div class="flex-col">
+          <label for="title-edit">Title</label>
+          <input type="text" name="title-edit" id="title-edit" placeholder="edit title">
+        </div>
+        
+        <div class="flex-col">
+          <label for="author-edit">Author</label>
+          <input type="text" name="author-edit" id="author-edit" placeholder="edit author">
+        </div>
+
+        <div class="flex-col">
+          <label for="year-edit">Year</label>
+          <input type="number" name="year-edit" id="year-edit" placeholder="edit year">
+        </div>
+        
+        <div class="flex-row">
+          <button type="submit" id="update-edit">Update</button>
+          <button id="cancel-edit">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
 </body>
 <script src="index.js"></script>
 </html>
