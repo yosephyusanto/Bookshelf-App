@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', function(){
 function addBook(){
   const title = document.getElementById('title').value
   const author = document.getElementById('author').value
-  const year = document.getElementById('year').value
+  const year = parseInt(document.getElementById('year').value)
   const isComplete = document.getElementById('finish').checked
   const id = generateId()
 
@@ -168,7 +168,7 @@ function editBook(bookID){
     }
 
     if(document.getElementById('year-edit').value !== ''){
-      books[target].year = document.getElementById('year-edit').value
+      books[target].year = parseInt(document.getElementById('year-edit').value) 
     }
 
     document.dispatchEvent(new Event(RENDER_EVENT))

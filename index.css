@@ -307,8 +307,9 @@ main{
     font-size: 10px;
   }
 
-  #search-book{
-    width: 80%;
+  #search-book,
+  #show-button{
+    width: 100%;
   }
 
   #filter{
